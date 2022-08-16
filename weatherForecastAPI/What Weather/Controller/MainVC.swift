@@ -15,6 +15,7 @@ final class MainVC: UIViewController {
     private var todayWeather = [WeatherForecast]()
     @IBOutlet private var locationTextFiled: UITextField!
     @IBAction private func searchButton(_ sender: UIButton) {
+        view.endEditing(true)
         if !locationTextFiled.text!.isEmpty {
             getData(location: locationTextFiled.text!)
         } else {
@@ -25,6 +26,9 @@ final class MainVC: UIViewController {
     //MARK: Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupKeyboardHiding()
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(keyboardHide))
+      view.addGestureRecognizer(gesture)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -79,7 +83,32 @@ final class MainVC: UIViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+    
+    @objc func keyboardHide() {
+        view.endEditing(true)
+    }
+    
 }
 
-
+//MARK: Extensions
+extension MainVC {
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        view.frame.origin.y = 0
+        if let keyboardFrame: NSValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
+            let keyboardRectangle = keyboardFrame.cgRectValue
+            let keyboardHeight = keyboardRectangle.height
+            view.frame.origin.y -= keyboardHeight - 180
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        view.frame.origin.y = 0
+    }
+    
+    private func setupKeyboardHiding() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    }
+}
 
