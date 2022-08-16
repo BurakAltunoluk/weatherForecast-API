@@ -76,8 +76,6 @@
 				60F1514A28A82D9300BC370F /* View */,
 				60F1514928A82D8500BC370F /* Controller */,
 				60F1514C28A82DDB00BC370F /* App */,
-				608C754828AA5CF2004173EF /* Alerts.storyboard */,
-				608C754A28AA5D4E004173EF /* AlertVC.swift */,
 			);
 			path = "What Weather";
 			sourceTree = "<group>";
@@ -95,6 +93,7 @@
 			children = (
 				60F1513828A82D4100BC370F /* MainVC.swift */,
 				60F1514D28A8560600BC370F /* DetailsVC.swift */,
+				608C754A28AA5D4E004173EF /* AlertVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -112,6 +111,7 @@
 			children = (
 				60F1513A28A82D4100BC370F /* Main.storyboard */,
 				60F1513F28A82D4500BC370F /* LaunchScreen.storyboard */,
+				608C754828AA5CF2004173EF /* Alerts.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
